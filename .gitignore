@@ -137,3 +137,6 @@ tmp/
 temp/
 *.swp
 *.bak
+
+build
+imgui-*
