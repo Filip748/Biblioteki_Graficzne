@@ -1,0 +1,139 @@
+# =========================
+# Systemy operacyjne (OS)
+# =========================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =========================
+# Środowiska i Edytory (IDE)
+# =========================
+
+# IntelliJ IDEA / CLion / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+cmake-build-*/
+out/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.dbmdl
+*.jfm
+
+# Eclipse
+.metadata
+.classpath
+.project
+.settings/
+.springBeans
+bin/
+
+# =========================
+# Java & Narzędzia budowania
+# =========================
+
+# Skompilowane pliki klas
+*.class
+
+# Archiwa i pakiety
+*.jar
+*.war
+*.ear
+*.nar
+
+# Maven
+target/
+pom.xml.tagdir
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# =========================
+# C/C++ & Narzędzia budowania
+# =========================
+
+# Skompilowane pliki obiektowe
+*.slo
+*.lo
+*.o
+*.obj
+
+# Prekompilowane nagłówki
+*.gch
+*.pch
+
+# Biblioteki dynamiczne (Shared)
+*.so
+*.dylib
+*.dll
+
+# Biblioteki statyczne
+*.lai
+*.la
+*.a
+*.lib
+
+# Pliki wykonywalne
+*.exe
+*.out
+*.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# =========================
+# Pliki tymczasowe i logi
+# =========================
+*.log
+logs/
+tmp/
+temp/
+*.swp
+*.bak
