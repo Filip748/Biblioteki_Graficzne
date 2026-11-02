@@ -1,31 +1,43 @@
-# User Interfaces and Graphics Libraries - AGH UST
+# User Interfaces and Graphics Libraries - AGH 
 
-This repository contains laboratory assignments for the "User Interfaces and Graphics Libraries" (*Interfejsy użytkownika i biblioteki graficzne*) course at AGH University of Science and Technology. All projects are written in C++ using the SFML library, with additional GUI elements provided by ImGui.
+This repository contains laboratory assignments for the "User Interfaces and Graphics Libraries" (*Interfejsy użytkownika i biblioteki graficzne*) course at AGH University of Science and Technology. All projects are written in C++ using SFML, Dear ImGui, and wxWidgets.
 
 ## Technologies Used
-* **C++17** (or newer)
-* **SFML 2.5+ / 3.x** (Simple and Fast Multimedia Library)
-* **ImGui** (Dear ImGui for UI rendering)
+- **C++17** (or newer)
+- **SFML 2.5+ / 3.x** (Simple and Fast Multimedia Library)
+- **ImGui** (Dear ImGui for UI rendering)
+- **wxWidgets 3.x** (Cross-Platform GUI Library)
 
 ---
 
 ## 🎮 Lab 1: Sokoban Clone (SFML Basics)
 A simple clone of the classic 1982 Japanese logic game, Sokoban. 
-* **Goal:** The player must push crates onto designated target locations. 
-* **Mechanics:** Crates can only be pushed one at a time using arrow keys. The game handles window resizing correctly and can be exited using the `ESC` key.
+- **Goal:** The player must push crates onto designated target locations. 
+- **Mechanics:** Crates can only be pushed one at a time using arrow keys. The game handles window resizing correctly and can be exited using the `ESC` key.
 
 ## 🖌️ Lab 2: Simple Paint (SFML + ImGui)
 An interactive drawing application allowing the creation of basic geometric shapes.
-* **Features:** Fixed 1800x900 window resolution.
-* **Menu Bar:** Includes options to create a New file, Open a PNG, Save As PNG (saving only the canvas without UI elements), and Exit the app.
-* **Tools Panel:** Implemented via ImGui. Allows selecting drawing tools (Line, Rectangle, Filled Rectangle, Circle).
-* **Tool Options:** Users can change the Border Color and Fill Color. When enabled, additional options allow adjusting border thickness and line drawing styles.
+- **Features:** Fixed 1800x900 window resolution.
+- **Menu Bar:** Includes options to create a New file, Open a PNG, Save As PNG (saving only the canvas without UI elements), and Exit the app.
+- **Tools Panel:** Implemented via ImGui. Allows selecting drawing tools (Line, Rectangle, Filled Rectangle, Circle).
+- **Tool Options:** Users can change the Border Color and Fill Color. When enabled, additional options allow adjusting border thickness and line drawing styles.
 
 ## 🌈 Lab 3: Color Models and Spaces
 An application that renders four distinct color wheels, each representing colors in a different model/space: **HSL, HSV, CMY, and RGB**.
-* **Mechanics:** The position of the pixels relates to the Hue/Saturation (or equivalent parameters based on polar coordinates).
-* **Interactivity:** A slider adjusts the third component of each model simultaneously (L for HSL, V for HSV, Y for CMY, and B for RGB).
-* **Optimization:** The project heavily focuses on pixel manipulation performance, updating the raw `sf::Image` buffer only when the slider state changes to maintain low refresh times.
+- **Mechanics:** The position of the pixels relates to the Hue/Saturation (or equivalent parameters based on polar coordinates).
+- **Interactivity:** A slider adjusts the third component of each model simultaneously (L for HSL, V for HSV, Y for CMY, and B for RGB).
+- **Optimization:** The project heavily focuses on pixel manipulation performance, updating the raw `sf::Image` buffer only when the slider state changes to maintain low refresh times.
 
+## 🐵 Lab 4: Vector Graphics & GUI Components (wxWidgets)
+A vector-based GUI drawing application featuring an interactive monkey character with customizable accessories, created using the `wxWidgets` framework[cite: 1, 2].
+- **Double Buffering:** Implemented via `wxBufferedDC` and `wxClientDC` within a custom `wxPanel` to eliminate screen flickering during redraws and window resizing[cite: 1, 2].
+- **Coordinate Transformation:** Uses `wxDC::SetDeviceOrigin` to ensure the monkey's arm-torso joint is permanently centered in the drawing panel regardless of window dimensions[cite: 1, 2].
+- **Interactive Controls:**
+  - **`wxCheckBox`:** Toggles the banana graphic loaded dynamically from a PNG file via `wxImage` and changes the monkey's facial expression from sad to happy[cite: 1, 2].
+  - **`wxScrollBar` & `wxGauge`:** Controls and displays the tilt angle of the monkey's arm holding the banana[cite: 1].
+  - **`wxColourDialog`:** Opens a native color picker to change the color of the drawn star[cite: 1, 2].
+  - **`wxChoice`:** Allows switching between three geometric shapes rendered above the monkey (Star via `DrawPolygon`, Crescent Moon, or Sun)[cite: 1].
+  - **`wxTextCtrl`:** Updates and renders both horizontal and 90-degree rotated text (`DrawRotatedText`) on the canvas in real time[cite: 1].
+- **Image Export:** A `wxButton` triggers a save file dialog (`wxFileDialog`), exporting the current canvas buffer to a PNG image file[cite: 1, 2].
 
-Readme was generated by Gemini Pro 3.1
+  Readme is generated by AI
