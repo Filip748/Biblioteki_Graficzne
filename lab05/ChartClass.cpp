@@ -45,7 +45,6 @@ double ChartClass::GetFunctionValue(double x)
  return x+sin(x*4.0);
 }
 
-// ---- macierze przeksztalcen (wspolrzedne jednorodne) ----
 
 static Matrix Set_Identity()
 {
@@ -71,8 +70,6 @@ static Matrix Set_Scale(double sx, double sy)
  return m;
 }
 
-// obrot o kat alpha (w stopniach) przeciwnie do ruchu wskazowek zegara
-// (w ukladzie ekranu os y skierowana jest w dol)
 static Matrix Set_Rotate(double alpha)
 {
  double a=alpha*3.14159265358979323846/180.0;
@@ -82,7 +79,6 @@ static Matrix Set_Rotate(double alpha)
  return m;
 }
 
-// "ladny" krok podzialki (1, 2 lub 5 razy potega 10)
 static double NiceStep(double range)
 {
  double raw=range/4.0;
@@ -111,16 +107,13 @@ void ChartClass::Draw(wxDC *dc, int w, int h)
 
  Set_Range();
 
- // skalowanie i okienkowanie: prostokat swiata [x0,x1]x[y0,y1] -> obszar wykresu
  double sx=(w-2*margin)/(x1-x0);
  double sy=(h-2*margin)/(y1-y0);
  Matrix window=Set_Translate(margin, h-margin)*Set_Scale(sx,-sy)*Set_Translate(-x0,-y0);
 
- // przesuniecie zadane przez uzytkownika (w jednostkach swiata)
  Matrix shift=Set_Translate(cfg->Get_dX()*sx, -cfg->Get_dY()*sy);
  Matrix ws=shift*window;
 
- // punkt obrotu: srodek ekranu lub srodek ukladu (po przesunieciu)
  double cx,cy;
  if (cfg->RotateScreenCenter())
   {
@@ -139,7 +132,6 @@ void ChartClass::Draw(wxDC *dc, int w, int h)
 
  double ax1,ay1,ax2,ay2;
 
- // osie ukladu
  dc->SetPen(wxPen(wxColour(0, 0, 255)));
  ax1=x0; ay1=0.0; ax2=x1; ay2=0.0;
  line2d(t,&ax1,&ay1,&ax2,&ay2);
@@ -148,9 +140,7 @@ void ChartClass::Draw(wxDC *dc, int w, int h)
  line2d(t,&ax1,&ay1,&ax2,&ay2);
  dc->DrawLine(ax1,ay1,ax2,ay2);
 
- // podzialki z opisami (na kazdej osi co najmniej jedna na czesci ujemnej
- // i jedna na dodatniej)
- const double tick=4.0; // dlugosc podzialki w pikselach
+ const double tick=4.0; 
  auto drawTick=[&](double v, bool xAxis)
   {
    double tx1,ty1,tx2,ty2;
@@ -178,7 +168,6 @@ void ChartClass::Draw(wxDC *dc, int w, int h)
  drawTicks(x0,x1,true);
  drawTicks(y0,y1,false);
 
- // wykres funkcji
  dc->SetPen(wxPen(wxColour(0, 160, 0)));
  double dx=(x_max-x_min)/(double)x_step;
  for (int i=0;i<x_step;i++)
