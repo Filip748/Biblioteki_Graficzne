@@ -30,6 +30,7 @@ class GUIMyFrame1 : public MyFrame1
 		GUIMyFrame1( wxWindow* parent );
 	//// end generated class members
   void Repaint();
+  void DrawScene(wxDC *dc, int w, int h);
 
 
 };
