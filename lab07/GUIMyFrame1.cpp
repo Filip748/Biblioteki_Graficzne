@@ -10,7 +10,6 @@ MyFrame1( parent )
  m_scrolledWindow->SetScrollbars(25, 25, 52, 40);
  m_scrolledWindow->SetBackgroundColour(wxColor(192, 192, 192));
 #ifdef __WXOSX__
- // Na macOS rysowanie przez wxClientDC nie dziala - rysujemy w obsludze wxEVT_PAINT
  m_scrolledWindow->Bind(wxEVT_PAINT, [this](wxPaintEvent&) {
   wxPaintDC dc(m_scrolledWindow);
   m_scrolledWindow->DoPrepareDC(dc);
@@ -22,7 +21,6 @@ MyFrame1( parent )
 void GUIMyFrame1::m_scrolledWindow_update( wxUpdateUIEvent& event )
 {
 #ifdef __WXOSX__
- // odmalowujemy tylko gdy obrazek sie zmienil (inaczej Refresh() w petli)
  static wxImage last;
  if (!last.IsSameAs(Img_Cpy)) { last = Img_Cpy; Repaint(); }
 #else
@@ -61,8 +59,8 @@ void GUIMyFrame1::m_b_rescale_click( wxCommandEvent& event )
  Img_Cpy = Img_Org.Scale(320, 240);
  wxClientDC dc(m_scrolledWindow);
  m_scrolledWindow->DoPrepareDC(dc);
- dc.Clear();                        // czyscimy tlo po wiekszym obrazku
- m_scrolledWindow->Scroll(0, 0);    // obrazek widoczny od lewego gornego rogu
+ dc.Clear();                        
+ m_scrolledWindow->Scroll(0, 0); 
 }
 
 void GUIMyFrame1::m_b_rotate_click( wxCommandEvent& event )
@@ -75,7 +73,7 @@ void GUIMyFrame1::m_b_rotate_hue_click( wxCommandEvent& event )
 {
  // TO DO: Przesuniecie Hue o 180 stopni
  Img_Cpy = Img_Org.Copy();
- Img_Cpy.RotateHue(0.5);          // 1.0 odpowiada 360 stopniom
+ Img_Cpy.RotateHue(0.5);         
 }
 
 void GUIMyFrame1::m_b_mask_click( wxCommandEvent& event )
@@ -85,7 +83,7 @@ void GUIMyFrame1::m_b_mask_click( wxCommandEvent& event )
  Img_Cpy.SetMaskFromImage(Img_Mask, 0, 0, 0);
  wxClientDC dc(m_scrolledWindow);
  m_scrolledWindow->DoPrepareDC(dc);
- dc.Clear();                        // czyscimy tlo, zeby przez maske nie bylo widac poprzedniego obrazka
+ dc.Clear();                       
 }
 
 void GUIMyFrame1::m_s_brightness_scroll( wxScrollEvent& event )
@@ -156,13 +154,13 @@ void GUIMyFrame1::Contrast(int value)
 void GUIMyFrame1::Repaint()
 {
 #ifdef __WXOSX__
- m_scrolledWindow->Refresh();       // na macOS wymuszamy odmalowanie (wxEVT_PAINT)
+ m_scrolledWindow->Refresh();       
  return;
 #endif
- wxBitmap bitmap(Img_Cpy);          // Tworzymy tymczasowa bitmape na podstawie Img_Cpy
- wxClientDC dc(m_scrolledWindow);   // Pobieramy kontekst okna
- m_scrolledWindow->DoPrepareDC(dc); // Musimy wywolac w przypadku wxScrolledWindow, zeby suwaki prawidlowo dzialaly
- dc.DrawBitmap(bitmap, 0, 0, true); // Rysujemy bitmape na kontekscie urzadzenia
+ wxBitmap bitmap(Img_Cpy);          
+ wxClientDC dc(m_scrolledWindow);  
+ m_scrolledWindow->DoPrepareDC(dc); 
+ dc.DrawBitmap(bitmap, 0, 0, true);
 }
 
 void GUIMyFrame1::Brightness(int value)
